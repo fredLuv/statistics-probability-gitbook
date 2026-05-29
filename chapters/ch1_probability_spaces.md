@@ -23,7 +23,8 @@ A probability space is defined by three components:
     *   *Non-negativity*: $P(A) \ge 0$ for all $A \in \mathcal{F}$
     *   *Normalization*: $P(\Omega) = 1$
     *   *Countable Additivity*: If $A_1, A_2, \dots \in \mathcal{F}$ are mutually disjoint events ($A_i \cap A_j = \emptyset$ for $i \ne j$), then:
-        $$P\left( \bigcup_{i=1}^{\infty} A_i \right) = \sum_{i=1}^{\infty} P(A_i)$$
+
+$$P\left( \bigcup_{i=1}^{\infty} A_i \right) = \sum_{i=1}^{\infty} P(A_i)$$
 
 ---
 
@@ -37,21 +38,31 @@ $$F_X(x) = P(X \le x)$$
 *   **Properties of CDFs**:
     1.  **Monotonically Non-decreasing**: If $x_1 < x_2$, then $F_X(x_1) \le F_X(x_2)$.
     2.  **Normalized Limits**: 
-        $$\lim_{x \to -\infty} F_X(x) = 0 \quad \text{and} \quad \lim_{x \to \infty} F_X(x) = 1$$
+
+$$\lim_{x \to -\infty} F_X(x) = 0 \quad \text{and} \quad \lim_{x \to \infty} F_X(x) = 1$$
+
     3.  **Right-Continuous**: For every $a \in \mathbb{R}$:
-        $$\lim_{x \to a^+} F_X(x) = F_X(a)$$
+
+$$\lim_{x \to a^+} F_X(x) = F_X(a)$$
 
 ---
 
 ### 3. Expectation, Variance, and Covariance Matrices
 *   **Expectation (Inner Product Formulation)**:
-    $$\mathbb{E}[X] = \int_{-\infty}^{\infty} x \, dF_X(x) = \int_{-\infty}^{\infty} x f_X(x) \, dx \quad (\text{for continuous } X)$$
+
+$$\mathbb{E}[X] = \int_{-\infty}^{\infty} x \, dF_X(x) = \int_{-\infty}^{\infty} x f_X(x) \, dx \quad (\text{for continuous } X)$$
+
 *   **Variance**:
-    $$\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$$
+
+$$\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$$
+
 *   **Covariance Matrix**: For a random vector $\mathbf{X} = [X_1, \dots, X_n]^T \in \mathbb{R}^n$, the covariance matrix $\Sigma \in \mathbb{R}^{n \times n}$ is:
-    $$\Sigma_{ij} = \text{Cov}(X_i, X_j) = \mathbb{E}[(X_i - \mathbb{E}[X_i])(X_j - \mathbb{E}[X_j])]$$
+
+$$\Sigma_{ij} = \text{Cov}(X_i, X_j) = \mathbb{E}[(X_i - \mathbb{E}[X_i])(X_j - \mathbb{E}[X_j])]$$
+
     *   *Cauchy-Schwarz for Random Variables:*
-        $$|\text{Cov}(X, Y)| \le \sqrt{\text{Var}(X) \text{Var}(Y)}$$
+
+$$|\text{Cov}(X, Y)| \le \sqrt{\text{Var}(X) \text{Var}(Y)}$$
 
 ---
 
@@ -65,22 +76,35 @@ $$P(Y \ge a) \le \frac{\mathbb{E}[Y]}{a}$$
 
 #### Step-by-Step Proof:
 1.  Let $I(Y \ge a)$ be an indicator random variable:
-    $$I(Y \ge a) = \begin{cases} 1 & \text{if } Y \ge a \\ 0 & \text{if } Y < a \end{cases}$$
+
+$$I(Y \ge a) = \begin{cases} 1 & \text{if } Y \ge a \\ 0 & \text{if } Y < a \end{cases}$$
+
 2.  Since $Y$ is non-negative and $a > 0$, we have the inequality:
-    $$a I(Y \ge a) \le Y$$
+
+$$a I(Y \ge a) \le Y$$
+
     *   *Proof of indicator inequality:*
         *   If $Y < a$, the LHS is $0 \le Y$ (which is true because $Y \ge 0$).
         *   If $Y \ge a$, the LHS is $a \cdot 1 = a \le Y$ (which is true by assumption).
 3.  Take the expectation on both sides (preserving the inequality by monotonicity of expectation):
-    $$\mathbb{E}[a I(Y \ge a)] \le \mathbb{E}[Y]$$
+
+$$\mathbb{E}[a I(Y \ge a)] \le \mathbb{E}[Y]$$
+
 4.  Since $a$ is a constant, factor it out:
-    $$a \mathbb{E}[I(Y \ge a)] \le \mathbb{E}[Y]$$
+
+$$a \mathbb{E}[I(Y \ge a)] \le \mathbb{E}[Y]$$
+
 5.  Recall that the expectation of an indicator variable is simply the probability of the event:
-    $$\mathbb{E}[I(Y \ge a)] = 1 \cdot P(Y \ge a) + 0 \cdot P(Y < a) = P(Y \ge a)$$
+
+$$\mathbb{E}[I(Y \ge a)] = 1 \cdot P(Y \ge a) + 0 \cdot P(Y < a) = P(Y \ge a)$$
+
 6.  Substitute this back into the inequality:
-    $$a P(Y \ge a) \le \mathbb{E}[Y]$$
+
+$$a P(Y \ge a) \le \mathbb{E}[Y]$$
+
 7.  Divide by $a$ ($a > 0$):
-    $$P(Y \ge a) \le \frac{\mathbb{E}[Y]}{a}$$
+
+$$P(Y \ge a) \le \frac{\mathbb{E}[Y]}{a}$$
 
 Markov's Inequality is proved.
 
@@ -95,13 +119,18 @@ $$P(|X - \mu| \ge k) \le \frac{\sigma^2}{k^2}$$
 #### Step-by-Step Proof:
 1.  Define the non-negative random variable $Y = (X - \mu)^2$, and let $a = k^2 > 0$.
 2.  Apply Markov's Inequality to $Y$ and $a$:
-    $$P(Y \ge a) \le \frac{\mathbb{E}[Y]}{a}$$
+
+$$P(Y \ge a) \le \frac{\mathbb{E}[Y]}{a}$$
+
 3.  Substitute $Y = (X - \mu)^2$ and $a = k^2$:
-    $$P((X - \mu)^2 \ge k^2) \le \frac{\mathbb{E}[(X - \mu)^2]}{k^2}$$
+
+$$P((X - \mu)^2 \ge k^2) \le \frac{\mathbb{E}[(X - \mu)^2]}{k^2}$$
+
 4.  Note that $(X - \mu)^2 \ge k^2$ is algebraically equivalent to $|X - \mu| \ge k$.
 5.  Recall that by definition, $\mathbb{E}[(X - \mu)^2] = \text{Var}(X) = \sigma^2$.
 6.  Substitute these equivalents back into the inequality:
-    $$P(|X - \mu| \ge k) \le \frac{\sigma^2}{k^2}$$
+
+$$P(|X - \mu| \ge k) \le \frac{\sigma^2}{k^2}$$
 
 Chebyshev's Inequality is proved.
 
@@ -117,19 +146,32 @@ $$\mathbb{E}[g(X)] \ge g(\mathbb{E}[X])$$
 1.  Let $\mu = \mathbb{E}[X]$.
 2.  Since $g$ is a convex function, there exists a tangent line to the curve $g(x)$ at the point $x = \mu$. Let this line be $L(x) = a + bx$.
 3.  By the mathematical definition of convexity, the function curve $g(x)$ lies entirely **above or on** its tangent line for all $x$:
-    $$g(x) \ge a + bx \quad \text{for all } x$$
+
+$$g(x) \ge a + bx \quad \text{for all } x$$
+
 4.  Evaluate the line at $x = \mu$: since the tangent touches the curve at this point:
-    $$g(\mu) = a + b\mu$$
+
+$$g(\mu) = a + b\mu$$
+
 5.  Substitute the random variable $X$ into the inequality:
-    $$g(X) \ge a + bX$$
+
+$$g(X) \ge a + bX$$
+
 6.  Take the expectation on both sides:
-    $$\mathbb{E}[g(X)] \ge \mathbb{E}[a + bX]$$
+
+$$\mathbb{E}[g(X)] \ge \mathbb{E}[a + bX]$$
+
 7.  By linearity of expectation:
-    $$\mathbb{E}[g(X)] \ge a + b\mathbb{E}[X]$$
+
+$$\mathbb{E}[g(X)] \ge a + b\mathbb{E}[X]$$
+
 8.  Recall $\mathbb{E}[X] = \mu$:
-    $$\mathbb{E}[g(X)] \ge a + b\mu$$
+
+$$\mathbb{E}[g(X)] \ge a + b\mu$$
+
 9.  Substitute $g(\mu)$ for $a + b\mu$:
-    $$\mathbb{E}[g(X)] \ge g(\mu) \implies \mathbb{E}[g(X)] \ge g(\mathbb{E}[X])$$
+
+$$\mathbb{E}[g(X)] \ge g(\mu) \implies \mathbb{E}[g(X)] \ge g(\mathbb{E}[X])$$
 
 Jensen's Inequality is proved.
 
@@ -144,18 +186,29 @@ $$P(S_n - \mathbb{E}[S_n] \ge \epsilon) \le e^{-2\epsilon^2 / \sum_{i=1}^{n}(b_i
 #### Step-by-Step Proof Outline:
 1.  **Apply the Chernoff Bound Technique**: For any $t > 0$, the event $S_n - \mathbb{E}[S_n] \ge \epsilon$ is equivalent to $e^{t(S_n - \mathbb{E}[S_n])} \ge e^{t\epsilon}$.
 2.  Apply Markov's Inequality:
-    $$P(S_n - \mathbb{E}[S_n] \ge \epsilon) = P\left(e^{t(S_n - \mathbb{E}[S_n])} \ge e^{t\epsilon}\right) \le e^{-t\epsilon} \mathbb{E}\left[e^{t(S_n - \mathbb{E}[S_n])}\right]$$
+
+$$P(S_n - \mathbb{E}[S_n] \ge \epsilon) = P\left(e^{t(S_n - \mathbb{E}[S_n])} \ge e^{t\epsilon}\right) \le e^{-t\epsilon} \mathbb{E}\left[e^{t(S_n - \mathbb{E}[S_n])}\right]$$
+
 3.  By independence, the expectation of the product factors:
-    $$\mathbb{E}\left[e^{t(S_n - \mathbb{E}[S_n])}\right] = \prod_{i=1}^{n} \mathbb{E}\left[e^{t(X_i - \mathbb{E}[X_i])}\right]$$
+
+$$\mathbb{E}\left[e^{t(S_n - \mathbb{E}[S_n])}\right] = \prod_{i=1}^{n} \mathbb{E}\left[e^{t(X_i - \mathbb{E}[X_i])}\right]$$
+
 4.  **Hoeffding's Lemma**: For any random variable $Y \in [a, b]$ with $\mathbb{E}[Y] = 0$:
-    $$\mathbb{E}[e^{tY}] \le e^{t^2(b - a)^2 / 8}$$
+
+$$\mathbb{E}[e^{tY}] \le e^{t^2(b - a)^2 / 8}$$
+
 5.  Substitute the Lemma back into the product:
-    $$P(S_n - \mathbb{E}[S_n] \ge \epsilon) \le e^{-t\epsilon} \prod_{i=1}^{n} e^{t^2(b_i - a_i)^2 / 8} = e^{-t\epsilon} e^{\frac{t^2}{8}\sum_{i=1}^{n}(b_i - a_i)^2}$$
+
+$$P(S_n - \mathbb{E}[S_n] \ge \epsilon) \le e^{-t\epsilon} \prod_{i=1}^{n} e^{t^2(b_i - a_i)^2 / 8} = e^{-t\epsilon} e^{\frac{t^2}{8}\sum_{i=1}^{n}(b_i - a_i)^2}$$
+
 6.  **Optimize for $t$**: To find the tightest possible bound, we minimize the exponent with respect to $t$. Let $C = \sum_{i=1}^{n}(b_i - a_i)^2$. The exponent is $f(t) = -t\epsilon + \frac{t^2}{8}C$.
 7.  Take the derivative and set to zero:
-    $$f'(t) = -\epsilon + \frac{t}{4}C = 0 \implies t^* = \frac{4\epsilon}{C}$$
+
+$$f'(t) = -\epsilon + \frac{t}{4}C = 0 \implies t^* = \frac{4\epsilon}{C}$$
+
 8.  Substitute $t^*$ back into the inequality:
-    $$P(S_n - \mathbb{E}[S_n] \ge \epsilon) \le e^{-t^*\epsilon + \frac{(t^*)^2}{8}C} = e^{-\frac{4\epsilon^2}{C} + \frac{16\epsilon^2}{8C^2}C} = e^{-\frac{4\epsilon^2}{C} + \frac{2\epsilon^2}{C}} = e^{-2\epsilon^2 / C}$$
+
+$$P(S_n - \mathbb{E}[S_n] \ge \epsilon) \le e^{-t^*\epsilon + \frac{(t^*)^2}{8}C} = e^{-\frac{4\epsilon^2}{C} + \frac{16\epsilon^2}{8C^2}C} = e^{-\frac{4\epsilon^2}{C} + \frac{2\epsilon^2}{C}} = e^{-2\epsilon^2 / C}$$
 
 Hoeffding's Inequality is proved.
 
@@ -173,7 +226,11 @@ In quantitative trading, let $X_1, X_2, \dots, X_n$ represent the daily returns 
 Option pricing relies heavily on the pricing function of call options, which is a **convex function** of the underlying asset price: $g(S_t) = \max(S_t - K, 0)$.
 
 *   By applying **Jensen's Inequality**, the expected future payoff of the option satisfies:
-    $$\mathbb{E}[\max(S_t - K, 0)] \ge \max(\mathbb{E}[S_t] - K, 0)$$
+
+$$\mathbb{E}[\max(S_t - K, 0)] \ge \max(\mathbb{E}[S_t] - K, 0)$$
+
 *   In a risk-neutral pricing framework, $\mathbb{E}[S_t] = S_0 e^{rt}$. Substituting this shows that the price of a European call option must always be greater than or equal to its discounted intrinsic value:
-    $$\text{Call Option Price} \ge \max(S_0 - K e^{-rt}, 0)$$
+
+$$\text{Call Option Price} \ge \max(S_0 - K e^{-rt}, 0)$$
+
 Jensen's inequality establishes the physical lower bound for option pricing, preventing arbitrage opportunities in options markets.

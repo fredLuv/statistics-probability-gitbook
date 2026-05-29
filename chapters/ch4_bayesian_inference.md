@@ -31,16 +31,22 @@ $$\theta \mid x \sim \text{Beta}(\alpha + x, \, \beta + n - x)$$
 #### The Normal-Normal Conjugate Model:
 Let $X \sim \mathcal{N}(\theta, \sigma^2)$ represent $n$ i.i.d. observations where variance $\sigma^2$ is known. Let the prior on $\theta$ be $\mathcal{N}(\mu_0, \sigma_0^2)$.
 *   **The Posterior Parameters**: The posterior is also Gaussian, $\theta \mid x \sim \mathcal{N}(\mu_n, \sigma_n^2)$, where:
-    $$\frac{1}{\sigma_n^2} = \frac{1}{\sigma_0^2} + \frac{n}{\sigma^2} \quad (\text{Posterior Precision} = \text{Prior Precision} + \text{Data Precision})$$
-    $$\mu_n = \sigma_n^2 \left( \frac{\mu_0}{\sigma_0^2} + \frac{n\bar{X}}{\sigma^2} \right) \quad (\text{Posterior Mean} = \text{Weighted Average of Prior Mean and Sample Mean})$$
+
+$$\frac{1}{\sigma_n^2} = \frac{1}{\sigma_0^2} + \frac{n}{\sigma^2} \quad (\text{Posterior Precision} = \text{Prior Precision} + \text{Data Precision})$$
+
+$$\mu_n = \sigma_n^2 \left( \frac{\mu_0}{\sigma_0^2} + \frac{n\bar{X}}{\sigma^2} \right) \quad (\text{Posterior Mean} = \text{Weighted Average of Prior Mean and Sample Mean})$$
 
 ---
 
 ### 2. Intervals: Credible vs. Confidence
 *   **Bayesian Credible Interval**: A $95\%$ credible interval $C$ is defined such that the probability that the parameter lies in $C$, **given the observed data**, is exactly $0.95$:
-    $$P(\theta \in C \mid x) = \int_{C} f(\theta \mid x) \, d\theta = 0.95$$
+
+$$P(\theta \in C \mid x) = \int_{C} f(\theta \mid x) \, d\theta = 0.95$$
+
 *   **Frequentist Confidence Interval**: A $95\%$ confidence interval $I$ is a random interval constructed such that **across infinite hypothetical repetitions** of the experiment, $I$ will contain the fixed true parameter $\theta_0$ exactly $95\%$ of the time:
-    $$P(X \in \{x : \theta_0 \in I(x)\}) = 0.95$$
+
+$$P(X \in \{x : \theta_0 \in I(x)\}) = 0.95$$
+
     *   *Critical Disconnect:* Once the data is collected and the frequentist interval is calculated (e.g. $[12, 18]$), the probability $P(\theta_0 \in [12, 18])$ is either $0$ or $1$. The frequentist framework does not allow assigning a probability to the parameter itself.
 
 ---
@@ -61,18 +67,29 @@ $$\hat{\theta} = \mathbb{E}[\theta \mid x]$$
 
 #### Step-by-Step Proof:
 1.  Set up the posterior expected loss function $f(a)$ to minimize:
-    $$f(a) = \mathbb{E}[(\theta - a)^2 \mid x] = \int (\theta - a)^2 f(\theta \mid x) \, d\theta$$
+
+$$f(a) = \mathbb{E}[(\theta - a)^2 \mid x] = \int (\theta - a)^2 f(\theta \mid x) \, d\theta$$
+
 2.  Differentiate $f(a)$ with respect to $a$. Assuming regularity conditions allow passing the derivative inside the integral:
-    $$f'(a) = \frac{\partial}{\partial a} \int (\theta - a)^2 f(\theta \mid x) \, d\theta = \int \frac{\partial}{\partial a} (\theta - a)^2 f(\theta \mid x) \, d\theta$$
+
+$$f'(a) = \frac{\partial}{\partial a} \int (\theta - a)^2 f(\theta \mid x) \, d\theta = \int \frac{\partial}{\partial a} (\theta - a)^2 f(\theta \mid x) \, d\theta$$
+
 3.  Compute the derivative of the quadratic term:
-    $$f'(a) = \int -2(\theta - a) f(\theta \mid x) \, d\theta = -2 \int \theta f(\theta \mid x) \, d\theta + 2a \int f(\theta \mid x) \, d\theta$$
+
+$$f'(a) = \int -2(\theta - a) f(\theta \mid x) \, d\theta = -2 \int \theta f(\theta \mid x) \, d\theta + 2a \int f(\theta \mid x) \, d\theta$$
+
 4.  Recall that the posterior density integrates to 1: $\int f(\theta \mid x) \, d\theta = 1$. Also, by definition, the expected value of $\theta$ under the posterior is the posterior mean: $\int \theta f(\theta \mid x) \, d\theta = \mathbb{E}[\theta \mid x]$.
 5.  Substitute these values back:
-    $$f'(a) = -2\mathbb{E}[\theta \mid x] + 2a$$
+
+$$f'(a) = -2\mathbb{E}[\theta \mid x] + 2a$$
+
 6.  Set the derivative to zero to find the minimum:
-    $$-2\mathbb{E}[\theta \mid x] + 2\hat{\theta} = 0 \implies \hat{\theta} = \mathbb{E}[\theta \mid x]$$
+
+$$-2\mathbb{E}[\theta \mid x] + 2\hat{\theta} = 0 \implies \hat{\theta} = \mathbb{E}[\theta \mid x]$$
+
 7.  Check the second derivative to verify it is a minimum:
-    $$f''(a) = 2 > 0 \quad (\text{Minimum verified!})$$
+
+$$f''(a) = 2 > 0 \quad (\text{Minimum verified!})$$
 
 The theorem is proved.
 
@@ -86,14 +103,23 @@ $$\int_{-\infty}^{m} f(\theta \mid x) \, d\theta = \frac{1}{2}$$
 
 #### Step-by-Step Proof:
 1.  Set up the posterior expected loss function $f(a)$ to minimize:
-    $$f(a) = \mathbb{E}[|\theta - a| \mid x] = \int_{-\infty}^{a} (a - \theta) f(\theta \mid x) \, d\theta + \int_{a}^{\infty} (\theta - a) f(\theta \mid x) \, d\theta$$
+
+$$f(a) = \mathbb{E}[|\theta - a| \mid x] = \int_{-\infty}^{a} (a - \theta) f(\theta \mid x) \, d\theta + \int_{a}^{\infty} (\theta - a) f(\theta \mid x) \, d\theta$$
+
 2.  Apply **Leibniz's Rule** to differentiate $f(a)$ with respect to $a$:
-    $$f'(a) = \int_{-\infty}^{a} \frac{\partial(a - \theta)}{\partial a} f(\theta \mid x) \, d\theta + (a - a)f(a \mid x) + \int_{a}^{\infty} \frac{\partial(\theta - a)}{\partial a} f(\theta \mid x) \, d\theta - (\hat{a} - a)f(a \mid x)$$
-    $$f'(a) = \int_{-\infty}^{a} (1) f(\theta \mid x) \, d\theta + \int_{a}^{\infty} (-1) f(\theta \mid x) \, d\theta$$
+
+$$f'(a) = \int_{-\infty}^{a} \frac{\partial(a - \theta)}{\partial a} f(\theta \mid x) \, d\theta + (a - a)f(a \mid x) + \int_{a}^{\infty} \frac{\partial(\theta - a)}{\partial a} f(\theta \mid x) \, d\theta - (\hat{a} - a)f(a \mid x)$$
+
+$$f'(a) = \int_{-\infty}^{a} (1) f(\theta \mid x) \, d\theta + \int_{a}^{\infty} (-1) f(\theta \mid x) \, d\theta$$
+
 3.  Simplify the integrals:
-    $$f'(a) = P(\theta \le a \mid x) - P(\theta > a \mid x) = P(\theta \le a \mid x) - \left( 1 - P(\theta \le a \mid x) \right) = 2 P(\theta \le a \mid x) - 1$$
+
+$$f'(a) = P(\theta \le a \mid x) - P(\theta > a \mid x) = P(\theta \le a \mid x) - \left( 1 - P(\theta \le a \mid x) \right) = 2 P(\theta \le a \mid x) - 1$$
+
 4.  Set the derivative to zero to find the minimum:
-    $$2 P(\theta \le \hat{\theta} \mid x) - 1 = 0 \implies P(\theta \le \hat{\theta} \mid x) = \frac{1}{2}$$
+
+$$2 P(\theta \le \hat{\theta} \mid x) - 1 = 0 \implies P(\theta \le \hat{\theta} \mid x) = \frac{1}{2}$$
+
     The optimal estimate $\hat{\theta}$ is the **posterior median**.
 
 The theorem is proved.
@@ -107,12 +133,18 @@ In machine learning and quantitative research, we frequently regularize linear r
 
 *   **Ridge Regression ($L_2$ Regularization) as a Gaussian Prior**:
     If we assume the regression weights $\beta_j$ follow a Gaussian prior centered at zero, $\beta_j \sim \mathcal{N}(0, \sigma_0^2)$, then the posterior log-likelihood is:
-    $$\log f(\boldsymbol{\beta} \mid y, X) \propto \log f(y \mid X, \boldsymbol{\beta}) + \log f(\boldsymbol{\beta}) \propto -\frac{1}{2\sigma^2}\|y - X\boldsymbol{\beta}\|_2^2 - \frac{1}{2\sigma_0^2}\|\boldsymbol{\beta}\|_2^2$$
+
+$$\log f(\boldsymbol{\beta} \mid y, X) \propto \log f(y \mid X, \boldsymbol{\beta}) + \log f(\boldsymbol{\beta}) \propto -\frac{1}{2\sigma^2}\|y - X\boldsymbol{\beta}\|_2^2 - \frac{1}{2\sigma_0^2}\|\boldsymbol{\beta}\|_2^2$$
+
     Maximizing this posterior probability (MAP estimation) is mathematically equivalent to **Ridge Regression**:
-    $$\min_{\boldsymbol{\beta}} \|y - X\boldsymbol{\beta}\|_2^2 + \alpha \|\boldsymbol{\beta}\|_2^2 \quad \text{where} \quad \alpha = \frac{\sigma^2}{\sigma_0^2}$$
+
+$$\min_{\boldsymbol{\beta}} \|y - X\boldsymbol{\beta}\|_2^2 + \alpha \|\boldsymbol{\beta}\|_2^2 \quad \text{where} \quad \alpha = \frac{\sigma^2}{\sigma_0^2}$$
+
 *   **Lasso Regression ($L_1$ Regularization) as a Laplace Prior**:
     If we assume the regression weights $\beta_j$ follow a double exponential (Laplace) prior centered at zero, $f(\beta_j) \propto e^{-|\beta_j|/b}$, then the MAP estimation problem resolves to:
-    $$\min_{\boldsymbol{\beta}} \|y - X\boldsymbol{\beta}\|_2^2 + \alpha \|\boldsymbol{\beta}\|_1 \quad \text{where} \quad \alpha = \frac{2\sigma^2}{b}$$
+
+$$\min_{\boldsymbol{\beta}} \|y - X\boldsymbol{\beta}\|_2^2 + \alpha \|\boldsymbol{\beta}\|_1 \quad \text{where} \quad \alpha = \frac{2\sigma^2}{b}$$
+
 Lasso regression is the direct mathematical result of assuming a Laplace prior on your feature weights.
 
 ### 2. Bayesian Parameter Updating in Market Maker Order Books

@@ -42,11 +42,16 @@ For a binary classification model, we model the probability $p_i = P(y_i = 1 \mi
 $$\log\left(\frac{p_i}{1-p_i}\right) = \boldsymbol{\beta}^T \mathbf{x}_i \implies p_i = \frac{1}{1 + e^{-\boldsymbol{\beta}^T \mathbf{x}_i}}$$
 
 *   **Log-Likelihood**:
-    $$l(\boldsymbol{\beta}) = \sum_{i=1}^{n} \left[ y_i \log(p_i) + (1-y_i)\log(1-p_i) \right]$$
+
+$$l(\boldsymbol{\beta}) = \sum_{i=1}^{n} \left[ y_i \log(p_i) + (1-y_i)\log(1-p_i) \right]$$
+
 *   **Newton-Raphson Optimization**: Since there is no closed-form algebraic solution for $\hat{\boldsymbol{\beta}}$, we optimize iteratively using the Hessian matrix $H$:
-    $$\boldsymbol{\beta}^{(new)} = \boldsymbol{\beta}^{(old)} - H^{-1} \nabla_{\boldsymbol{\beta}} l(\boldsymbol{\beta})$$
+
+$$\boldsymbol{\beta}^{(new)} = \boldsymbol{\beta}^{(old)} - H^{-1} \nabla_{\boldsymbol{\beta}} l(\boldsymbol{\beta})$$
+
     Where the gradient and Hessian are:
-    $$\nabla_{\boldsymbol{\beta}} l(\boldsymbol{\beta}) = X^T (y - p), \quad H = -X^T W X \quad (\text{with diagonal } W_{ii} = p_i(1-p_i))$$
+
+$$\nabla_{\boldsymbol{\beta}} l(\boldsymbol{\beta}) = X^T (y - p), \quad H = -X^T W X \quad (\text{with diagonal } W_{ii} = p_i(1-p_i))$$
 
 ---
 
@@ -80,17 +85,28 @@ The frequentist objective is to find the variance of our estimator: $\text{Var}_
 
 ### The Bootstrap Formulation:
 1.  We define the **Empirical Distribution Function (EDF)** $F_n$ as the discrete probability distribution that places probability weight $\frac{1}{n}$ on each observed data point $x_i$:
-    $$F_n(x) = \frac{1}{n}\sum_{i=1}^{n} I(X_i \le x)$$
+
+$$F_n(x) = \frac{1}{n}\sum_{i=1}^{n} I(X_i \le x)$$
+
 2.  By the **Glivenko-Cantelli Theorem** (the fundamental theorem of statistics), as $n \to \infty$, the empirical distribution function $F_n$ converges **uniformly** and almost surely to the true data-generating distribution $F$:
-    $$\sup_x |F_n(x) - F(x)| \xrightarrow{a.s.} 0$$
+
+$$\sup_x |F_n(x) - F(x)| \xrightarrow{a.s.} 0$$
+
 3.  The **Bootstrap Principle** replaces the unknown true distribution $F$ with the observed empirical distribution $F_n$:
-    $$\text{True Variance: } \text{Var}_F(\hat{\theta}_n) \quad \approx \quad \text{Bootstrap Variance: } \text{Var}_{F_n}(\hat{\theta}_n^*)$$
+
+$$\text{True Variance: } \text{Var}_F(\hat{\theta}_n) \quad \approx \quad \text{Bootstrap Variance: } \text{Var}_{F_n}(\hat{\theta}_n^*)$$
+
 4.  To evaluate $\text{Var}_{F_n}(\hat{\theta}_n^*)$ computationally, we draw $B$ bootstrap samples (size $n$ with replacement) from our empirical distribution $F_n$. Let $\theta^*_b$ be the statistic calculated on bootstrap sample $b$:
-    $$\hat{\sigma}^2_{boot} = \frac{1}{B-1}\sum_{b=1}^{B} \left( \theta^*_b - \bar{\theta}^* \right)^2 \quad \text{where} \quad \bar{\theta}^* = \frac{1}{B}\sum_{b=1}^{B} \theta^*_b$$
+
+$$\hat{\sigma}^2_{boot} = \frac{1}{B-1}\sum_{b=1}^{B} \left( \theta^*_b - \bar{\theta}^* \right)^2 \quad \text{where} \quad \bar{\theta}^* = \frac{1}{B}\sum_{b=1}^{B} \theta^*_b$$
+
 5.  By the **Weak Law of Large Numbers (WLLN)**, as the number of bootstrap simulations $B \to \infty$:
-    $$\hat{\sigma}^2_{boot} \xrightarrow{p} \text{Var}_{F_n}(\hat{\theta}_n^*)$$
+
+$$\hat{\sigma}^2_{boot} \xrightarrow{p} \text{Var}_{F_n}(\hat{\theta}_n^*)$$
+
 6.  By the **Glivenko-Cantelli Theorem** and the **Continuous Mapping Theorem**, as $n \to \infty$:
-    $$\text{Var}_{F_n}(\hat{\theta}_n^*) \xrightarrow{p} \text{Var}_F(\hat{\theta}_n)$$
+
+$$\text{Var}_{F_n}(\hat{\theta}_n^*) \xrightarrow{p} \text{Var}_F(\hat{\theta}_n)$$
 
 Therefore, the simulated bootstrap variance is mathematically guaranteed to converge to the true, unknown population variance of our estimator.
 
