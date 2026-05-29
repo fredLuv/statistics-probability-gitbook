@@ -204,11 +204,11 @@ $$P(S_n - \mathbb{E}[S_n] \ge \epsilon) \le e^{-t\epsilon} \prod_{i=1}^{n} e^{t^
 6.  **Optimize for $t$**: To find the tightest possible bound, we minimize the exponent with respect to $t$. Let $C = \sum_{i=1}^{n}(b_i - a_i)^2$. The exponent is $f(t) = -t\epsilon + \frac{t^2}{8}C$.
 7.  Take the derivative and set to zero:
 
-$$f'(t) = -\epsilon + \frac{t}{4}C = 0 \implies t^* = \frac{4\epsilon}{C}$$
+$$f'(t) = -\epsilon + \frac{t}{4}C = 0 \implies t^{\ast} = \frac{4\epsilon}{C}$$
 
-8.  Substitute $t^*$ back into the inequality:
+8.  Substitute $t^{\ast}$ back into the inequality:
 
-$$P(S_n - \mathbb{E}[S_n] \ge \epsilon) \le e^{-t^*\epsilon + \frac{(t^*)^2}{8}C} = e^{-\frac{4\epsilon^2}{C} + \frac{16\epsilon^2}{8C^2}C} = e^{-\frac{4\epsilon^2}{C} + \frac{2\epsilon^2}{C}} = e^{-2\epsilon^2 / C}$$
+$$P(S_n - \mathbb{E}[S_n] \ge \epsilon) \le e^{-t^{\ast}\epsilon + \frac{(t^{\ast})^2}{8}C} = e^{-\frac{4\epsilon^2}{C} + \frac{16\epsilon^2}{8C^2}C} = e^{-\frac{4\epsilon^2}{C} + \frac{2\epsilon^2}{C}} = e^{-2\epsilon^2 / C}$$
 
 Hoeffding's Inequality is proved.
 

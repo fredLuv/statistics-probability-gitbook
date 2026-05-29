@@ -65,7 +65,7 @@ $$\hat{f}_h(x) = \frac{1}{n h} \sum_{i=1}^{n} K\left( \frac{x - x_i}{h} \right)$
 *   **The Bias-Variance Tradeoff of Bandwidth**:
     *   **Large $h$ (Over-smoothed)**: High bias, low variance. We wash out local details and peaks.
     *   **Small $h$ (Under-smoothed)**: Low bias, high variance. The density spikes at individual data points.
-    *   *Asymptotic Mean Integrated Squared Error (AMISE)* is minimized at the optimal bandwidth $h^* \propto n^{-1/5}$.
+    *   *Asymptotic Mean Integrated Squared Error (AMISE)* is minimized at the optimal bandwidth $h^{\ast} \propto n^{-1/5}$.
 
 ---
 
@@ -94,19 +94,19 @@ $$\sup_x |F_n(x) - F(x)| \xrightarrow{a.s.} 0$$
 
 3.  The **Bootstrap Principle** replaces the unknown true distribution $F$ with the observed empirical distribution $F_n$:
 
-$$\text{True Variance: } \text{Var}_F(\hat{\theta}_n) \quad \approx \quad \text{Bootstrap Variance: } \text{Var}_{F_n}(\hat{\theta}_n^*)$$
+$$\text{True Variance: } \text{Var}_F(\hat{\theta}_n) \quad \approx \quad \text{Bootstrap Variance: } \text{Var}_{F_n}(\hat{\theta}_n^{\ast})$$
 
-4.  To evaluate $\text{Var}_{F_n}(\hat{\theta}_n^*)$ computationally, we draw $B$ bootstrap samples (size $n$ with replacement) from our empirical distribution $F_n$. Let $\theta^*_b$ be the statistic calculated on bootstrap sample $b$:
+4.  To evaluate $\text{Var}_{F_n}(\hat{\theta}_n^{\ast})$ computationally, we draw $B$ bootstrap samples (size $n$ with replacement) from our empirical distribution $F_n$. Let $\theta^{\ast}_b$ be the statistic calculated on bootstrap sample $b$:
 
-$$\hat{\sigma}^2_{boot} = \frac{1}{B-1}\sum_{b=1}^{B} \left( \theta^*_b - \bar{\theta}^* \right)^2 \quad \text{where} \quad \bar{\theta}^* = \frac{1}{B}\sum_{b=1}^{B} \theta^*_b$$
+$$\hat{\sigma}^2_{boot} = \frac{1}{B-1}\sum_{b=1}^{B} \left( \theta^{\ast}_b - \bar{\theta}^{\ast} \right)^2 \quad \text{where} \quad \bar{\theta}^{\ast} = \frac{1}{B}\sum_{b=1}^{B} \theta^{\ast}_b$$
 
 5.  By the **Weak Law of Large Numbers (WLLN)**, as the number of bootstrap simulations $B \to \infty$:
 
-$$\hat{\sigma}^2_{boot} \xrightarrow{p} \text{Var}_{F_n}(\hat{\theta}_n^*)$$
+$$\hat{\sigma}^2_{boot} \xrightarrow{p} \text{Var}_{F_n}(\hat{\theta}_n^{\ast})$$
 
 6.  By the **Glivenko-Cantelli Theorem** and the **Continuous Mapping Theorem**, as $n \to \infty$:
 
-$$\text{Var}_{F_n}(\hat{\theta}_n^*) \xrightarrow{p} \text{Var}_F(\hat{\theta}_n)$$
+$$\text{Var}_{F_n}(\hat{\theta}_n^{\ast}) \xrightarrow{p} \text{Var}_F(\hat{\theta}_n)$$
 
 Therefore, the simulated bootstrap variance is mathematically guaranteed to converge to the true, unknown population variance of our estimator.
 
